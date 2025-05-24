@@ -1,1 +1,4 @@
 /.venv
+/__pycache__
+/machine/__pycache__
+/social_media/__pycache__
