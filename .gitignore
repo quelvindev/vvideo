@@ -1,4 +1,7 @@
 /.venv
+/img
 /__pycache__
 /machine/__pycache__
 /social_media/__pycache__
+views/__pycache__
+/.vscode/*

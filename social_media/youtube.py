@@ -1,9 +1,3 @@
-
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-
 from pytubefix import YouTube
 from machine.log_config import LogConfig
 from machine.source_folder import SourceFolder
