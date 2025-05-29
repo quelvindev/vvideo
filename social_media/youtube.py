@@ -10,7 +10,7 @@ class DownYouTube:
         self.log = LogConfig()
         
 
-    def dowload(self,source ):
+    def download(self,source ):
         self.log.info('Coletando url')
         yt = YouTube(source)
 
@@ -23,4 +23,4 @@ class DownYouTube:
 
 if __name__ == "__main__":
     down = DownYouTube()
-    down.dowload('https://www.youtube.com/watch?v=u9feBros-2k')
+    down.download('https://www.youtube.com/watch?v=u9feBros-2k')
