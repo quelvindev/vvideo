@@ -1,6 +1,8 @@
+import sys,os
 import flet as ft 
 import screeninfo as esif
 from urllib.parse import urlparse
+import tldextract
 from machine.source_folder import SourceFolder
 from social_media.advisor import Advisor
 
@@ -29,23 +31,38 @@ class HomePage:
         self.advisor = Advisor()
        
 
-
+    def resource_path(self,relative_path):
+    
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
+    
     def is_valid_url(self,url: str) -> bool:
         parsed = urlparse(url)
         return all([parsed.scheme in ('http', 'https','.com'), parsed.netloc])    
         
     def getlink(self,e):
         link = self.link.value.strip()
+        ext_domain = tldextract.extract(link) 
         print("Link informado:",link )
+        print('dominicio',ext_domain.domain)
         is_link = self.is_valid_url(link)
         if is_link:
+            self.text_info.spans = [
+                ft.TextSpan(
+                        f"Link recebido: {ext_domain.domain }",
+                        ft.TextStyle(weight=ft.FontWeight.BOLD, color="#568956"),
+                    )
+                ] 
+            self.page.update()
             self.advisor.lighthouse(link)
             self.text_info.spans = [
                 ft.TextSpan(
-                        f"Link recebido: {self.link.value}",
-                        ft.TextStyle(weight=ft.FontWeight.BOLD, color="#568956"),
+                        f"Vídeo baixado" ,
+                        ft.TextStyle(weight=ft.FontWeight.BOLD, color="#087908"),
                     )
-                ]    
+                ] 
+            
         else:
             self.text_info.spans = [
                 ft.TextSpan(
@@ -53,9 +70,10 @@ class HomePage:
                     ft.TextStyle(weight=ft.FontWeight.BOLD, color="#EE3A3A"),
                 )
             ]
-            self.link.value = ""
             self.link.border_color ="#EE3A3A"
-            self.link.focus()
+        self.link.value = ""
+            
+        self.link.focus()
         self.page.update()
     def getClear(self,e):
 
@@ -150,26 +168,26 @@ class HomePage:
                                                     #mouse_cursor = ft.MouseCursor.ZOOM_IN,
                                                     tooltip="Linkedin",
                                                     on_click=lambda e: self.page.launch_url("https://www.linkedin.com/in/quelvincarvalho/"),
-                                                    content=ft.Image(src='img/linkedin.png')
+                                                    content=ft.Image(src=self.resource_path('img/linkedin.png'))
                                                 ),
                                                 ft.IconButton(
                                                     padding = ft.padding.only(2,5,2,5),
                                                     tooltip="Github",
                                                     on_click=lambda e: self.page.launch_url("https://github.com/quelvindev"),
-                                                    content=ft.Image(src='img/github.png')
+                                                    content=ft.Image(src=self.resource_path('img/github.png'))
                                                 ),
                                                  ft.IconButton(
                                                     padding = ft.padding.only(2,5,2,5),
                                                     tooltip="Site",
-                                                    on_click=lambda e: self.page.launch_url("https://quelvindev.github.io/meusite/"),
-                                                    content=ft.Image(src='img/site.png')
+                                                    on_click=lambda e: self.page.launch_url("https://www.quelvincarvalho.com.br/"),
+                                                    content=ft.Image(src=self.resource_path('img/site.png'))
                                                 ),
                                                  ft.IconButton(
                                                     padding = ft.padding.only(2,5,2,5),
                                                     tooltip="Doe - Colabore",
                                                     #on_click=lambda e: self.page.set_clipboard("https://github.com/quelvindev"),
                                                     on_click= self.copy_pix,
-                                                    content=ft.Image(src='img/doe.png')
+                                                    content=ft.Image(src=self.resource_path('img/doe.png'))
                                                 )
                                                 
                                                 ],
