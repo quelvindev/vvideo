@@ -5,3 +5,6 @@
 /social_media/__pycache__
 views/__pycache__
 /.vscode/*
+/app.spec
+/build
+/dist
