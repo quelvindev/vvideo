@@ -11,7 +11,6 @@ class DownTiktok:
 
     def download(self,source):
         link_tiktok = source
-        
         if link_tiktok:
             folder = self.folder.create_folder_vid()
             os.system(f'python -m tiktok_downloader --snaptik --url {link_tiktok} --save {folder}/tiktok_video.mp4')

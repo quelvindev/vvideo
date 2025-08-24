@@ -1,5 +1,6 @@
 from social_media.youtube import DownYouTube
 from social_media.tiktok import DownTiktok
+from social_media.kwai import DownKwai
 from social_media.instagram import DownInstagram
 from social_media.x import DownX
 
@@ -24,12 +25,15 @@ class Advisor:
             self.video =DownTiktok()
             self.video.download(url)
 
+        elif ext_domain.domain == 'KWAI':
+            self.video =DownKwai()
+            self.video.download(url)
+
         elif ext_domain.domain == 'INSTAGRAM':
             self.video =DownInstagram()
             self.video.download(url)
 
         elif ext_domain.domain == 'X':
-            print(f'download x {url}')
             self.video =DownX()
             self.video.download(url)
 
