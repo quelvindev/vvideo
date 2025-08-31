@@ -1,5 +1,5 @@
 import os
-import tiktok_downloader
+from tiktok_downloader import snaptik
 from machine.log_config import LogConfig
 from machine.source_folder import SourceFolder
 
@@ -8,7 +8,7 @@ class DownTiktok:
         self.folder = SourceFolder()
         self.log = LogConfig()
     
-
+    
     def download(self,source):
         link_tiktok = source
         if link_tiktok:

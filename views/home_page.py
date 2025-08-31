@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 import tldextract
 from machine.source_folder import SourceFolder
 from social_media.advisor import Advisor
+from machine.utis import Utis
 
 
 
@@ -29,6 +30,8 @@ class HomePage:
         source = SourceFolder()
         source.mk_folders()
         self.advisor = Advisor()
+        tiktok_downloader = Utis()
+        tiktok_downloader.ensure_package_installed("tiktok_downloader")
        
 
     def resource_path(self,relative_path):
